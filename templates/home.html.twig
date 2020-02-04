@@ -12,6 +12,15 @@
     <h1>{{title | upper}}</h1>
     <h2>Le vrai titre est "{{title}}"</h1></h2>
     <p> Comment allez-vous?</p> 
+    <ul>
+        <li><a href="/hello">Allez voir hello mais le nom a changé mince..!</a></li>
+        <li><a href=" {{ path('hello_base') }} ">essaye plutot ça. on utilise le nom de la route... pas son adresse</a></li>
+        <li><a href=" {{ path('hello_name_age', {'prenom': 'Seb','age': 25 }) }} ">Essaye le lien vers Seb et son age</a></li>
+    </ul>
+    
+
+
+
     {% if age >=18 %}
         <p>Vous êtes un adulte.</p>
     {% elseif age >=12 %}

@@ -9,9 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController {
 
     /**
-     * @Route("/hello/{prenom}/age/{age}", name="hello", requirements={"age" = "\d+"})
-     * @Route("/hello")
-     * @Route("/hello/{prenom}")
+     * @Route("/hello/{prenom}/age/{age}", name="hello_name_age", requirements={"age" = "\d+"})
+     * @Route("/salut", name="hello_base")
+     * @Route("/hello/{prenom}", name="hello_name")
      * Shows page saying Bonjour
      * @return void
      */
