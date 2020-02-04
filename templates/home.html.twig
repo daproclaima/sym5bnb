@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Mon application Smfony 5 Rbnb</title>    
-            
-                   
-</head>
-<body>
+{% extends "base.html.twig" %}
+{% block title %}Je ne veux pas dire Welcome mais SALUT TOUT LE MONDE{% endblock %}
+{% block header %}
+<h2>Voici le header</h2>
+{% endblock %}
+{% block body %}
     <h1>{{title | upper}}</h1>
     <h2>Le vrai titre est "{{title}}"</h1></h2>
     <p> Comment allez-vous?</p> 
@@ -47,5 +42,5 @@
             <p>(iteration #{{loop.index0}}) {{prenom}} a {{age}} ans</p>
         {% endif %}
     {% endfor %}
-</body>
-</html>
+
+{% endblock %}
