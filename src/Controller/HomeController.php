@@ -9,7 +9,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController {
 
     /**
+     * @Route("/hello/{prenom}/age/{age}", name="hello", requirements={"age" = "\d+"})
+     * @Route("/hello")
+     * @Route("/hello/{prenom}")
+     * Shows page saying Bonjour
+     * @return void
+     */
+    public function hello($prenom = "anonyme", $age = 0){
+        return new Response("Bonjour $prenom! Vous avez $age ans." );
+    }
+
+
+    /**
      * @Route("/", name="homepage")
+     * Shows homepage
      */
     public function home(){
 
@@ -22,7 +35,7 @@ class HomeController extends AbstractController {
                 'title'=>"Bonsoir à tous",
                 'age'=> 14,
                 'tableau'=> $prenoms
-                ]
+            ]
         );
     }
 }
