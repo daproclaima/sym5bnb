@@ -9,7 +9,8 @@
                    
 </head>
 <body>
-    <h1>{{title}}</h1>
+    <h1>{{title | upper}}</h1>
+    <h2>Le vrai titre est "{{title}}"</h1></h2>
     <p> Comment allez-vous?</p> 
     {% if age >=18 %}
         <p>Vous êtes un adulte.</p>

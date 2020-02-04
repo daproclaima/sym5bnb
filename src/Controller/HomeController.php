@@ -19,7 +19,7 @@ class HomeController extends AbstractController {
         return $this->render(
             'home.html.twig', 
             [
-                'title'=>"Au revoir à tous",
+                'title'=>"Bonsoir à tous",
                 'age'=> 14,
                 'tableau'=> $prenoms
                 ]
