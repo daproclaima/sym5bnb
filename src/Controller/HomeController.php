@@ -19,7 +19,7 @@ class HomeController {
                 <body>
                     <h1>Bonjour à tous</h1>
                     <p> Nous y voilà!</p>
-        ");
+        "); 
     }
 }
 
