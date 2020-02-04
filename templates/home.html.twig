@@ -11,5 +11,31 @@
 <body>
     <h1>{{title}}</h1>
     <p> Comment allez-vous?</p> 
+    {% if age >=18 %}
+        <p>Vous êtes un adulte.</p>
+    {% elseif age >=12 %}
+        <p>Vous êtes un adolescent.</p>
+    {% else %}
+        <p>Vous êtes mineur.</p>
+    {% endif %}
+
+
+    <ul>
+        {% for compteur in 0..10 %}
+            <li>{{compteur}}</li>
+        {% endfor %}
+    </ul>
+
+
+
+    {% for prenom, age in tableau %}
+        {% if loop.first %}
+            <strong>{{prenom}} a {{age}} ans</strong>
+        {% elseif loop.last %}
+            <em>(iteration #{{loop.index0}}) {{prenom}} a {{age}} ans</em>
+        {% else %}
+            <p>(iteration #{{loop.index0}}) {{prenom}} a {{age}} ans</p>
+        {% endif %}
+    {% endfor %}
 </body>
 </html>
