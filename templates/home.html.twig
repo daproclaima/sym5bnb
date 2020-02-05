@@ -1,43 +1,26 @@
 {% extends "base.html.twig" %}
 {% block title %}Je ne veux pas dire Welcome mais SALUT TOUT LE MONDE{% endblock %}
 {% block body %}
-    <h1>{{title | upper}}</h1>
-    <h2>Le vrai titre est "{{title}}"</h1></h2>
-    <p> Comment allez-vous?</p> 
-    <ul>
-        <li><a href="/hello">Allez voir hello mais le nom a changé mince..!</a></li>
-        <li><a href=" {{ path('hello_base') }} ">essaye plutot ça. on utilise le nom de la route... pas son adresse</a></li>
-        <li><a href=" {{ path('hello_name_age', {'prenom': 'Seb','age': 25 }) }} ">Essaye le lien vers Seb et son age</a></li>
-    </ul>
-    
+<div class="container">
+    <div class="jumbotron mt-3">
+        <h1 class="display-3">Bienvenue sur symBNB !</h1>
+        <p class="lead">Nous mettons en relation les voyageurs  et les propriétaires qui veulent profiter d'opportunités et gagner de l'argent en proposant leur bien à la location.</p>
+        <hr class="my-4">
+        <p>Vous êtes voyageurs et vous voulez voir où vous pourrez loger pour votre prochain déplacement?</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Voir nos annonces</a>
+        </p>
+    </div>
 
-
-
-    {% if age >=18 %}
-        <p>Vous êtes un adulte.</p>
-    {% elseif age >=12 %}
-        <p>Vous êtes un adolescent.</p>
-    {% else %}
-        <p>Vous êtes mineur.</p>
-    {% endif %}
-
-    {# comment in twig #}
-    {# <ul>
-        {% for compteur in 0..10 %}
-            <li>{{compteur}}</li>
-        {% endfor %}
-    </ul> #}
-
-
-
-    {% for prenom, age in tableau %}
-        {% if loop.first %}
-            <strong>{{prenom}} a {{age}} ans</strong>
-        {% elseif loop.last %}
-            <em>(iteration #{{loop.index0}}) {{prenom}} a {{age}} ans</em>
-        {% else %}
-            <p>(iteration #{{loop.index0}}) {{prenom}} a {{age}} ans</p>
-        {% endif %}
-    {% endfor %}
-
+    <h2>Nos appartements stars</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-light mb-3">
+                <div class="card-header text-center">
+                    3 chambres, <strong>49€</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
