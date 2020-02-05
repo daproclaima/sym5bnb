@@ -10,18 +10,23 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $ad = new Ad();
+        for($i = 1; $i <=30; $i++ ){
 
-        $ad->setTitle("Titre de l'annonce")
-        ->setSlug('titre-de-l-annonce')
-        ->setCoverImage('http://placehold.it/1000x300')
-        ->setIntroduction("Bonjour à tous c'est une introduction")
-        ->setContent("<p>Je suis un contenu riche !</p>")
-        ->setPrice(80)
-        ->setRooms(3);
-        
-        $manager->persist($ad);
+            $ad = new Ad();
 
+            $ad->setTitle("Titre de l'annonce n.$i")
+            ->setSlug("titre-de-l-annonce n.$i")
+            ->setCoverImage('http://placehold.it/1000x300')
+            ->setIntroduction("Bonjour à tous c'est une introduction")
+            ->setContent("<p>Je suis un contenu riche !</p>")
+            ->setPrice(mt_rand(40, 200))
+            ->setRooms(mt_rand(1,5));
+            
+            // save the content 
+            $manager->persist($ad);
+
+        }
+        // execute only once the query with the whole saved content
         $manager->flush();
     }
 }
