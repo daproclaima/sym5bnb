@@ -41,7 +41,12 @@ class AdController extends AbstractController
             ->add('rooms')
             ->add('price')
             ->add('coverImage')
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, [
+                'label' => 'Créer la nouvelle annonce',
+                'attr'=> [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
             ->getForm();
 
         return $this->render('ad/new.html.twig', [
