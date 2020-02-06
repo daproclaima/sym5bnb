@@ -44,6 +44,9 @@ class AdController extends AbstractController
             $manager->persist($ad);
             $manager->flush();
 
+            return $this->redirectToRoute('ads_show', [
+                'slug' => $ad->getSlug()
+            ]);
         }
 
         return $this->render('ad/new.html.twig', [
