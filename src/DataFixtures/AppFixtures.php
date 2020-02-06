@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Ad;
+use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -32,6 +33,15 @@ class AppFixtures extends Fixture
             
             // save the content 
             $manager->persist($ad);
+
+
+            for($j = 0; $j <= mt_rand(2,5); $j++) {
+                $image = new Image();
+                $image->setUrl($faker->imageUrl())
+                    ->setCaption($faker->sentence())->setAd($ad);
+
+                $manager->persist($image);
+            }
 
         }
         // execute only once the query with the whole saved content
