@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
             
 
             $ad->setTitle($title)
-            ->setSlug("titre-de-l-annonce n.$i")
+            ->setSlug($slug)
             ->setCoverImage($coverImage)
             ->setIntroduction($introduction)
             ->setContent($content)
