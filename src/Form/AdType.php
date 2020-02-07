@@ -52,7 +52,8 @@ class AdType extends AbstractType
 
             ->add('images', 
             CollectionType::class, [
-                'entry_type' => ImageType::class
+                'entry_type' => ImageType::class,
+                'allow_add' => true
             ])
         ;
     }
@@ -60,7 +61,7 @@ class AdType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Ad::class,
+            'data_class' => Ad::class
         ]);
     }
 }
