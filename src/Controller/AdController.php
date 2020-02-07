@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Entity\Image;
 use App\Form\AdType;
 use App\Repository\AdRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,8 +37,22 @@ class AdController extends AbstractController
 
         $ad = new Ad();
 
+        $image = new Image();
+
+        $image->setUrl('http://placehold.it/400x200')
+        ->setCaption('Titre 1');
+        $image2 = new Image();
+
+        $image->setUrl('http://placehold.it/400x200')
+        ->setCaption('Titre 2');
+
+        $ad->addImage($image)
+            ->addImage($image2);
+
         $form = $this->createForm(AdType::class, $ad);
+
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()) {
         
             $manager->persist($ad);
@@ -47,7 +62,7 @@ class AdController extends AbstractController
                 "success",
                 "L'annonce <strong>{$ad->getTitle()}</strong> a bien été enregristrée !"
             );
-            
+
             return $this->redirectToRoute('ads_show', [
                 'slug' => $ad->getSlug()
             ]);
