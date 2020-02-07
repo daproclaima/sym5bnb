@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Ad;
 use App\Entity\Image;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -14,6 +15,24 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('Fr-fr');
        
+        $users = [];
+
+        // Here below we manage users
+        for($i = 0; $i<=10; $i++){
+
+            $user = new User();
+            $user->setFirstName($faker->firstName())
+                ->setLastName($faker->lastName())
+                ->setEmail($faker->email())
+                ->setIntroduction($faker->sentence)
+                ->setDescription('<p>'. join('</p><p>', $faker->paragraphs(3)) . '</p>')
+                ->setHash('password');
+
+            $manager->persist($user);
+            $users[] = $user;
+        }
+
+        // Here below the ads are managed
         for($i = 1; $i <=30; $i++ ){
 
             $ad = new Ad();
@@ -24,12 +43,15 @@ class AppFixtures extends Fixture
             $content = '<p>'. join('</p><p>', $faker->paragraphs(5)) . '</p>';
             
 
+            $user = $users[mt_rand(0,count($users) - 1)];
+
             $ad->setTitle($title)
                 ->setCoverImage($coverImage)
                 ->setIntroduction($introduction)
                 ->setContent($content)
                 ->setPrice(mt_rand(40, 200))
-                ->setRooms(mt_rand(1,5));
+                ->setRooms(mt_rand(1,5))
+                ->setAuthor($user);
             
             // save the content 
             $manager->persist($ad);
