@@ -21,15 +21,16 @@ class AdType extends AbstractType
      *
      * @param string $label
      * @param string $placeholder
+     * @param array $options
      * @return array
      */
-    private function getConfiguration($label, $placeholder) {
-        return [
+    private function getConfiguration($label, $placeholder, $options = []) {
+        return array_merge([
             'label'=> $label,
             'attr'=> [
                 'placeholder'=> $placeholder
             ]
-        ];
+        ], $options);
     }
 
 
@@ -38,7 +39,7 @@ class AdType extends AbstractType
         $builder
             ->add('title', TextType::class, $this->getConfiguration("Titre","Tapez un super titre pour votre annonce"))
 
-            ->add('slug', TextType::class, $this->getConfiguration("Chaine URL", "Lien web de l'annonce (automatique)"))
+            ->add('slug', TextType::class, $this->getConfiguration("Adresse web", "Tapez l'adresse web (automatique)", ['required' => false]))
 
             ->add('coverImage', UrlType::class,$this->getConfiguration("URL de l'image principale", "Donnez l'adresse URL d'une image donnant vraiment envie de venir chez vous !"))
 
