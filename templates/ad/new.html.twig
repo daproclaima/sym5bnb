@@ -17,9 +17,12 @@
 
 {% block _ad_images_widget %}
     <p>Ici, vous pouvez ajouter vos propres images !</p>
+
     {{ form_widget(form) }}
+    <input type="hidden" id="widgets-counter" value="0">
+
     <div class="form-group">
-    {# button[type=button]#add-image.btn.btn-primary #}
+        {# button[type=button]#add-image.btn.btn-primary #}
         <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
     </div>
 {% endblock %}
@@ -55,7 +58,8 @@
     $('#add-image').click(function(){
 
         // First step: I pick up the fields' number I am about to create
-        const index = $('#ad_images div.form-group').length;
+        const index = +$('#widgets-counter').val();
+        console.log(index);
         
 
         // Now I want the entries' prototype
@@ -64,6 +68,8 @@
 
         // console.log(tmpl);
         $('#ad_images').append(tmpl);
+
+        $('#widgets-counter').val(index + 1);
 
         // here we handle the delete button
         handleDeleteButtons();
