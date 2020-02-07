@@ -30,14 +30,21 @@
 
 
 
-{% block _ad_images_entrey_widget %}
-<div class="form-group">
+{% block _ad_images_entry_widget %}
+<div class="form-group" id="block_{{id}}">
     <div class="row">
-        <div class="col">
-            {{form_widget(form.url)}}
+        <div class="col-10">
+            <div class="row">
+                <div class="col">
+                    {{form_widget(form.url)}}
+                </div>
+                <div class="col">
+                    {{form_widget(form.caption)}}
+                </div>
+            </div>
         </div>
-        <div class="col">
-            {{form_widget(form.caption)}}
+        <div class="col-2">
+            <button type="button" data-action = "delete" data-target = "#block_{{id}}" class="btn btn-danger">X</button>
         </div>
     </div>
 </div>
@@ -53,10 +60,25 @@
 
         // Now I want the entries' prototype
 
-    const tmpl = $('#ad_images').data('prototype').replace(/__name__/g, index);
+        const tmpl = $('#ad_images').data('prototype').replace(/__name__/g, index);
 
-    // console.log(tmpl);
-    $('#ad_images').append(tmpl);
+        // console.log(tmpl);
+        $('#ad_images').append(tmpl);
+
+        // here we handle the delete button
+        handleDeleteButtons();
     });
+
+    function handleDeleteButtons() {
+        $('button[data-action="delete"]').click(function(){
+            const target = this.dataset.target;
+            // console.log(target);
+            $(target).remove();
+        })
+    }
+
+    // everytime the page loads we call the function
+    handleDeleteButtons();
+
 </script>
 {% endblock %}
