@@ -1,25 +1,25 @@
 {% extends "base.html.twig" %}
-{% block title %}Creation d'une annonce{% endblock %}
+{% block title %}Édtition d'une annonce{% endblock %}
 
 {% form_theme form _self %}
 
 {% block body %}
     <div class="container">
-        <h1>Créer une nouvelle annonce</h1>
+            <h1>Modifier l'annonce: {{ad.title}}</h1>
 
-        {{form_start(form)}}
+            {{form_start(form)}}
 
-        {{form_widget(form)}}
+            {{form_widget(form)}}
 
-        <button type="submit" class="btn btn-primary">Créer la nouvelle annonce</button>
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            
+            {{form_end(form)}}
         
-         {{form_end(form)}}
-    
     </div>
 {% endblock %}
 
 {% block _ad_images_widget %}
-    <p>Ici, vous pouvez ajouter vos propres images !</p>
+    <p>Ici, vous pouvez changer vos images !</p>
 
     {{ form_widget(form) }}
     <input type="hidden" id="widgets-counter" value="0">
