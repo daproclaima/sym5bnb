@@ -1,4 +1,6 @@
 {
+    "name": "Sym5BnB",
+    "description": "Symfony 5 project remaking AirBnB",
     "type": "project",
     "license": "proprietary",
     "require": {
