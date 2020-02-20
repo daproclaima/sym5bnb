@@ -2,18 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\PasswordUpdate;
 use App\Entity\User;
 use App\Form\AccountType;
-use App\Form\PasswordUpdateType;
+use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
+use App\Form\PasswordUpdateType;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AccountController extends AbstractController
 {
@@ -116,9 +116,36 @@ class AccountController extends AbstractController
      * @Route("/account/password-update", name="account_password")
      * @return Response
      */
-    public function updatePassword() {
-        $passwordUpdate = new PasswordUpdate();
+    public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
+    $passwordUpdate = new PasswordUpdate();
+
+        $user = $this->getUser();
+
         $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+           // #1 Check oldPassword match with user's password hashed in db
+           if(!$encoder->isPasswordValid($user, $passwordUpdate->getOldPassword())) {
+            //    handle error
+           } else {
+               $newPassword = $passwordUpdate->getNewPassword();
+               $hash = $encoder->encodePassword($user, $newPassword);
+
+               $user->setHash($hash);
+
+               $manager->persist($user);
+               $manager->flush();
+               $this->addFlash(
+                   'success',
+                   "Votre mot de passe a bien été modifié !"
+               );
+
+               return $this->redirectToRoute('homepage');
+           }
+        }
+
         return $this->render('account/password.html.twig', [
             'form' => $form->createView()
         ]);
