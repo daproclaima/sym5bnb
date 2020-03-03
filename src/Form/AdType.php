@@ -24,7 +24,7 @@ class AdType extends ApplicationType {
      * @param array $options
      * @return array
      */
-    private function getConfiguration($label, $placeholder, $options = []) {
+    protected function getConfiguration($label, $placeholder, $options = []) {
         return array_merge([
             'label'=> $label,
             'attr'=> [
