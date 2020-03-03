@@ -120,4 +120,27 @@ class AdController extends AbstractController
             'ad'=> $ad
         ]);
     }
+
+    /**
+     * Deletes the ad
+     *
+     * @param Ad $ad
+     * @param EntityManagerInterface $manager
+     * 
+     * @Route("/ads/{slug}/delete", name= "ads_delete")
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message="Cette annonce ne vous appartient pas. Vous ne pouvez donc pas la supprimer.")
+     * 
+     * @return Response
+     */
+    public function delete (Ad $ad, EntityManagerInterface $manager) {
+        $manager->remove($ad);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            "L'annonce <strong>{$ad->getTitle()}</strong> a bien été supprimée !"
+        );
+        return $this->redirectToRoute("ads_index");
+
+    }
 }
