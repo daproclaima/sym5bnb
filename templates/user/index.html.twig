@@ -10,9 +10,15 @@
             <img src="{{user.picture}}" class="avatar mb-3" alt="Avatar de {{user.fullName}}">
             <br>
             <span class="badge badge-primary">{{user.ads | length}} annonces</span>
-            <div class="col-9">
-                <h1>{{user.fullName}}</h1>
-            </div>
+        </div>
+        <div class="col-9">
+            <h1>{{user.fullName}}</h1>
+            {% if user is same as (app.user) %}
+                <div class="mt-3">
+                    <a href="{{ path('account_profile')}}" class="btn btn-primary mr-2 mb-2">Modifier mes informations</a>
+                    <a href="{{path('account_password')}}" class="btn btn-primary mb-2">Modifier mon mot de passe</a>
+                </div>
+            {% endif %}
         </div>
 
         {{user.description | raw}}
