@@ -5,7 +5,13 @@
     <h1>Alors, comme ça on veut casser mon site ?!</h1>
     <div class="alert alert-danger">
       <p>Vous n'êtes pas authorisé à accéder à cette ressource !</p>
+       {# {{ dump() }} #}
+       {# <p>{{exception.message}}</p> #}
+       {# It s not forcly a good idea. In prod env, we load the cache. So this message will not change unless we reload the cache which is complex... #}
     </div>
+
+     
+
 
     <a href="{{path('homepage')}}" class="btn btn-primary">Retour à l'accueil</a>
     <a href="{{path('ads_index')}}" class="btn btn-success">Nos annonces</a>
