@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Ad;
-use ApplicationType;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
