@@ -51,11 +51,15 @@
         {% set a = ad.author %}
             <div class="row mb-3 align-items-center">
                 <div class="col-3">
-                    <img src="{{a.picture}}" class="avatar avatar-medium" alt="Avatar de {{a.fullName}}">
+                    <a href="{{path('user_show',{'slug': a.slug})}}">
+                        <img src="{{a.picture}}" class="avatar avatar-medium" alt="Avatar de {{a.fullName}}">
+                    </a>
                 </div>
                 <div class="col">
-                    <h3>{{a.fullName}}</h3>
-                    <span class="badge badge-primary">{{a.ads | length}} annonces</span>
+                    <a href="{{path('user_show',{'slug': a.slug})}}">
+                        <h3>{{a.fullName}}</h3>
+                        <span class="badge badge-primary">{{a.ads | length}} annonces</span>
+                    </a>
                 </div>
             </div>
             {{a.description | raw}}
