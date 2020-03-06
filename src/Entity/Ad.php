@@ -90,6 +90,31 @@ class Ad
     }
 
     /**
+     * Gives array of unavailable booking days for the ad
+     *
+     * @return array An DateTime objects array representing occupied days
+     */
+    public function getNotAvailableDays(){
+        $notAvailableDays = [];
+        foreach($this->bookings as $booking) {
+            // calculate range of days between arrival day and departure day
+            $resultat = range(
+                $booking->getStartDate()->getTimeStamp(),
+                $booking->getEndDate()->getTimeStamp(),
+                24 * 60 * 60
+            );
+
+            $days = array_map(function($dayTimeStamp){
+                return new \DateTime(date('Y-m-d', $dayTimeStamp));
+            }, $resultat);
+
+            $notAvailableDays = array_merge($notAvailableDays, $days);
+        }
+
+        return $notAvailableDays;
+    }
+
+    /**
      * Inits the slug
      *
      * @ORM\PrePersist

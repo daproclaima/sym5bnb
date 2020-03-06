@@ -33,11 +33,13 @@ class Booking
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan("today", message="La date d'arrivée doit être ultérieure à la date d'aujourd'hui." )
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan(propertyPath="startDate", message="La date d'arrivée doit être plus grande que la date d'arrivée." )
      */
     private $endDate;
 
@@ -55,6 +57,46 @@ class Booking
      * @ORM\Column(type="text", nullable=true)
      */
     private $comment;
+
+    public function isBookableDates() {
+        // 1) we need to know impossible dates for the ad
+        $notAvailableDays = $this->ad->getNotAvailableDays();
+        // 2) then compare chosen date with impossible dates
+        $bookingDays = $this->getDays();
+
+        $formatDay = function($day) {
+            return $day->format('Y-m-d');
+        };
+
+        $days = array_map($formatDay, $bookingDays);
+
+        $notAvailable = array_map($formatDay,$notAvailableDays);
+
+        foreach($days as $day) {
+            if(array_search($day, $notAvailable) !== false) return false;
+        }
+        //else ... forcly
+        return true;
+    }
+    /**
+     * Returns an array of booked days at booking
+     *
+     * @return array An array of DateTime objects as booking days
+     */
+    public function getDays() {
+        
+        $resultat = range(
+            $this->startDate->getTimestamp(),
+            $this->endDate->getTimestamp(),
+            24 * 60 * 60
+        );
+
+        $days = array_map(function($dayTimeStamp) {
+            return new \DateTime(date('Y-m-d', $dayTimeStamp));
+        }, $resultat);
+
+        return $days;
+    }
 
     /**
      * Callback invokated at each new booking
