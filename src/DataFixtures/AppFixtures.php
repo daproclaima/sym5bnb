@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Ad;
 use App\Entity\Booking;
+use App\Entity\Comment;
 use App\Entity\Image;
 use App\Entity\Role;
 use App\Entity\User;
@@ -121,6 +122,16 @@ class AppFixtures extends Fixture
                 ->setComment($comment);
 
                 $manager->persist($booking);
+
+                // handles comments
+                if(mt_rand(0,1)) {
+                    $comment = new Comment;
+                    $comment->setContent($faker->paragraph())
+                    ->setRating(mt_rand(0,5))
+                    ->setAuthor($booker)
+                    ->setAd($ad);
+                    $manager->persist($comment);
+                }
             }
         }
         // execute only once the query with the whole saved content
