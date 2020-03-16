@@ -60,3 +60,7 @@ span.rating i {
 .alert .btn {
     color: white;
 }
+
+.alert-success .btn-light {
+    color: black;
+}

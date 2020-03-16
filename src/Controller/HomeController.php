@@ -40,7 +40,7 @@ class HomeController extends AbstractController {
         array_push($adsSelection, $ads[3] );
         $ads = $adsSelection;
 
-        return $this->render('ad/index.html.twig', [
+        return $this->render('home.html.twig', [
             'ads' => $ads
         ]);
 
