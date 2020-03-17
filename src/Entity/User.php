@@ -264,7 +264,7 @@ class User implements UserInterface
         })->toArray();
         $roles[] = 'ROLE_USER';
 
-        return $roles;
+        return array_unique($roles);
     }
 
     
