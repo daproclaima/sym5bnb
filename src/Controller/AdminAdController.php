@@ -13,6 +13,8 @@ class AdminAdController extends AbstractController
      */
     public function index(AdRepository $repo)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+
         return $this->render('admin/ad/index.html.twig', [
             'ads' => $repo->findAll()
         ]);

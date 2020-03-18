@@ -16,36 +16,34 @@ security:
             security: false
         
         admin:
-            pattern: ˆ/admin
+            pattern: ˆ/admin/*
             anonymous: true
             provider: in_database
             form_login:
                 login_path: admin_account_login
                 check_path: admin_account_login
             logout:
-                path: logout
+                path: app_admin_account_logout
                 target: homepage
-
             guard:
                 authenticators:
-                    - App\Security\AdminFormAuthenticator
+                    - App\Security\LoginFormAuthenticator
 
         main:
-            anonymous: lazy
-
+            context: normal
+            anonymous: true
             provider: in_database
-
             form_login: 
                 login_path: account_login
                 check_path: account_login
-
             logout:
                 path: account_logout
                 target: account_login
-            
             guard:
                 authenticators:
-                    - App\Security\AdminFormAuthenticator
+                    - App\Security\LoginFormAuthenticator
+                    - App\Security\AdminLoginFormAuthenticator
+                entry_point: App\Security\LoginFormAuthenticator
             
 
             # activate different ways to authenticate
