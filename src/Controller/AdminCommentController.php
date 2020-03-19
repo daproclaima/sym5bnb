@@ -62,7 +62,7 @@ class AdminCommentController extends AbstractController
        $manager->flush();
        $this->addFlash(
            'success',
-           "Le commentaire a bien été supprimé."
+           "Le commentaire nº {$comment->getAuthor()->getFullName()}  de a bien été supprimé."
        );
        return $this->redirectToRoute('admin_comments_index');
     }
