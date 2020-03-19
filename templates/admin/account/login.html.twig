@@ -28,9 +28,14 @@
 					</h4>
 				</div>
 				<div class="card-body">
+				{% if error %}
+					<div class="alert alert-danger">
+						<p>Les informations entrées sont incorrectes.</p>
+					</div>
+				{% endif %}
 					<form method="POST">
 						<div class="form-group">
-							<label for="_username">Email</label><input type="text" class="form-control" placeholder="adresse email" name="_username">
+							<label for="_username">Email</label><input type="text" class="form-control" placeholder="adresse email" name="_username" value="{{last_username}}">
 						</div>
 						<div class="form-group">
 							<label for="_password">Mot de passe</label><input type="password" class="form-control" placeholder="Mot de passe" name="_password">

@@ -16,8 +16,7 @@ security:
             security: false
         
         admin:
-            pattern: ˆ/admin/*
-            anonymous: true
+            pattern: ˆ/admin/
             provider: in_database
             form_login:
                 login_path: admin_account_login
@@ -27,11 +26,11 @@ security:
                 target: homepage
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthenticator
+                    - App\Security\AdminLoginFormAuthenticator
 
         main:
             context: normal
-            anonymous: true
+            anonymous: lazy
             provider: in_database
             form_login: 
                 login_path: account_login
