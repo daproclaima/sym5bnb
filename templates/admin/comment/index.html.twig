@@ -41,7 +41,7 @@
             <th>
                 <div class="text-center">
                     <a href="{{path('admin_comment_edit',{'id': comment.id})}}" class="btn btn-primary mb-2" alt="editer"><i class="fas fa-edit"></i></a>
-                    <a href="#" class="btn btn-danger" alt="supprimer"><i class="fas fa-trash"></i></a> 
+                    <a href="{{path('admin_comment_delete',{'id': comment.id})}}" class="btn btn-danger" alt="supprimer"><i class="fas fa-trash"></i></a> 
                 </div>
             </th>
         </tr>
