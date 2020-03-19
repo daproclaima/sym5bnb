@@ -18,6 +18,7 @@ security:
         admin:
             pattern: ˆ/admin/
             provider: in_database
+            anonymous: true
             form_login:
                 login_path: admin_account_login
                 check_path: admin_account_login
