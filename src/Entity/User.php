@@ -13,10 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(
- *  fields={"email"},
- *  message = "Un autre utilisateur s'est déjà inscrit avec cette adresse email, merci de la modifier."
- * )
+ * @UniqueEntity(fields={"email"}, message = "Un autre utilisateur s'est déjà inscrit avec cette adresse email, merci de la modifier.")
  */
 class User implements UserInterface
 {
@@ -97,6 +94,24 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $inscriptionDate;
+
+    /**
+     * Callback invokated at each new user creation or update
+     *
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     * @return void
+     */
+    public function prepersist() {
+        if(empty($this->inscriptionDate)) {
+            $this->inscriptionDate = new \DateTime();
+        }
+    }
 
     public function getFullName() {
         return "{$this->getFirstName()} {$this->getLastName()}";
@@ -368,6 +383,18 @@ class User implements UserInterface
                 $comment->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInscriptionDate(): ?\DateTimeInterface
+    {
+        return $this->inscriptionDate;
+    }
+
+    public function setInscriptionDate(\DateTimeInterface $inscriptionDate): self
+    {
+        $this->inscriptionDate = $inscriptionDate;
 
         return $this;
     }

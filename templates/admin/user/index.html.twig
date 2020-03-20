@@ -1,0 +1,41 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des utilisateurs{% endblock %}
+{% block body %}
+<div class="container-fluid">
+ <h1 class="my-5">Administration des utilisateurs</h1>
+ <table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date d'inscription</th>
+            <th>Prénom et nom</th>
+            <th>Introduction</th>
+            <th>Description</th>
+            <th>Nombre d'annonces</th>
+            <th>Nombre de réservations</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <th>{{user.id}}</th>
+            <th>{{user.inscriptionDate| date('d/m/Y H:i')}}</th>
+            <th><img src="{{user.picture}}" alt="Avatar de {{user.fullName}}" class="avatar avatar-micro mr-2">{{user.fullName}}</th>
+            <th>{{user.introduction}}</th>
+            <th>{{user.description}}</th>
+            <th>{{user.ads | length}}</th>
+            <th>{{user.bookings | length}}</th>
+            <th>
+                <div class="text-center">
+                    <a href="#" class="btn btn-primary mb-1" alt="editer"><i class="fas fa-edit"></i></a>
+                    <a href="#" class="btn btn-danger" alt="supprimer"><i class="fas fa-trash"></i></a> 
+                </div>
+            </th>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</div>
+{% endblock %}
