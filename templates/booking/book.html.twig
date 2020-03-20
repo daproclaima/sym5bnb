@@ -43,7 +43,7 @@
 {% block javascripts %}
  {{ parent() }}
     <script>
-        $(document).ready(function() {
+        // $(document).ready(function() {
             // let datepicker = $.fn.datepicker.noConflict(); 
             // $.fn.bootstrapDP = datepicker; 
             $('#booking_startDate, #booking_endDate').datepicker({
@@ -56,7 +56,7 @@
                 startDate: new Date()
             });
              $('#booking_startDate, #booking_endDate').on('change', calculateAmount);
-        })
+        // })
 
 
         function calculateAmount() {
