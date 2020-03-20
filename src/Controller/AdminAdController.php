@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
+use App\Service\Pagination;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +14,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminAdController extends AbstractController
 {
     /**
-     * @Route("/admin/ads", name="admin_ads_index")
+     * @Route("/admin/ads/{page<\d+>?1}", name="admin_ads_index")
      */
-    public function index(AdRepository $repo)
+    public function index(AdRepository $repo, $page, Pagination $pagination)
     {
+
+        // $ad = $repo->find(5);
+        // $ad = $repo->findOneBy([
+        //     'title' => 'Dolor ullam at tempore quis aperiam a.'
+        // ]);
+        // dump($ad);
+        // $ads = $repo->findBy([], [], 5, 10);
+        // dump($ads);
+        $pagination->setEntityClass(Ad::class)->setLimit(10)->setPage($page);
         $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
 
         return $this->render('admin/ad/index.html.twig', [
-            'ads' => $repo->findAll()
+           'pagination' => $pagination
         ]);
     }
 
