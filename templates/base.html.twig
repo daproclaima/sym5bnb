@@ -6,8 +6,7 @@
 
         <meta name="viewport" content="width= device-width, user-scalable=no">
         {% block stylesheets %}
-            <link rel="stylesheet" href="/css/bootstrap.min.css">
-            <link rel="stylesheet" href="/css/app.css">
+            {{ encore_entry_link_tags('css/app') }}
         {% endblock %}
     </head>
     <body>
