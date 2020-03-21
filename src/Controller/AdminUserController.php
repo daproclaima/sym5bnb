@@ -18,7 +18,7 @@ class AdminUserController extends AbstractController
      */
     public function index(UserRepository $repo, $page, Pagination $pagination)
     {
-        $pagination->setEntityClass(User::class)->setLimit(5)
+        $pagination->setEntityClass(User::class)->setLimit(5 )
         ->setPage($page);
         return $this->render('admin/user/index.html.twig', [
             'pagination' => $pagination,
