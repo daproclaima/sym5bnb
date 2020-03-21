@@ -31,7 +31,7 @@
 
     {% if user.ads  | length > 0 %}
     
-        <div class="col">
+        <div class="row">
             {% for ad in user.ads %}
                 {% include "ad/_ad.html.twig" %}
             {% endfor %}

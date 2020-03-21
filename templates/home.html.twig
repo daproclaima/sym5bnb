@@ -1,6 +1,8 @@
 {% extends "base.html.twig" %}
 {% block title %}Sébastien NOBOUR symfony 5 website{% endblock %}
 {% block body %}
+{# {{dump(ads)}} #}
+{# {{dump(users)}} #}
 <div class="container">
     <div class="jumbotron mt-3">
         <h1 class="display-3">Bienvenue sur symBNB !</h1>
@@ -15,64 +17,31 @@
     <h2 class="h1 my-5">Nos appartements stars !</h2>
     {# TODO: 2 times row so removed one #}
     <div class="row">
-        {% for ad in ads %}
-        <div class="col-md-4">
-            <div class="card bg-light mb-3">
-                <div class="card-header text-center">
-                    {{ad.rooms}} chambres, <strong>{{ad.price}} /nuit</strong> <br>
-                    <small>Pas encore noté</small>
-                </div>
-
-                <img src="{{ad.coverImage}}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block;">
-                
-                <div class="card-body">
-                    <h4 class="card-title">
-                        {{ad.title}}
-                    </h4>
-                    <p class="card-text">
-                        {{ad.introduction}}
-                    </p>
-                    <a href="#" class="btn btn-secondary">En savoir plus !</a>
-                </div>
-            </div>
-        </div>
+        {% for data in ads %}
+        {% include "ad/_ad.html.twig" with {'ad': data.annonce} %}
         {% endfor %}
     </div>
     <h2 class="h1 my-5">Nos propriétaires stars !</h2>
     <div class="row">
-    {# {% for author in ads %} #}
+    {% for data in users %}
+    {% set user = data.user %}
         <div class="col">
             <div class="card border-secondary mb-3">
                 <div class="card-body">
-                    <h4 class="card-title">Lior Chamla</h4>
+                    <h4 class="card-title">{{user.fullName}}</h4>
                     
                     <hr>
 
                     <div class="card-text">
-                        <img src="https://placehold.it/64x64" alt="Avatar de Lior Chamla" class="float-left mr-3">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                         <a href="#" class="btn btn-secondary float-right">En savoir plus !</a>
+                        <img src="{{user.picture}}" alt="Avatar de {{user.fullName}}" class="float-left mr-3">
+                        <p>{{user.introduction}}</p>
+                         <a href="{{path('user_show', {'slug': user.slug})}}" class="btn btn-secondary float-right">En savoir plus !</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col">
-            <div class="card border-secondary mb-3">
-                <div class="card-body">
-                    <h4 class="card-title">Sébastien NOBOUR</h4>
-                    
-                    <hr>
-
-                    <div class="card-text">
-                        <img src="https://placehold.it/64x64" alt="Avatar de Sébastien NOBOUR" class="float-left mr-3">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                         <a href="#" class="btn btn-secondary float-right">En savoir plus !</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {# {% endfor %} #}
+    {% endfor %}
     </div>
 </div>
 {% endblock %}
