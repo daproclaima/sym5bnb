@@ -1,4 +1,5 @@
 @import url('./bootstrap.min.css');
+@import url('./datepicker.min.css');
 
 div.container, div.container-fluid {
     margin-top: 20px;
@@ -47,14 +48,10 @@ div.carrousel-caption {
     }
 }
 
-
-
-
-
-
-
-.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
-    color : firebrick !important;
+.datepicker-panel {
+    .disabled{   
+        color : firebrick !important;
+    }
 }
 
 span.rating i {

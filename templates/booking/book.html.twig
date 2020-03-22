@@ -4,7 +4,6 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha256-siyOpF/pBWUPgIcQi17TLBkjvNgNQArcmwJB8YvkAgg=" crossorigin="anonymous"/>
 {% endblock %}
 
 {% block body %}
@@ -43,12 +42,14 @@
 {% block javascripts %}
  {{ parent() }}
     <script>
-        // $(document).ready(function() {
+        $(document).ready(function() {
+
             // let datepicker = $.fn.datepicker.noConflict(); 
             // $.fn.bootstrapDP = datepicker; 
             $('#booking_startDate, #booking_endDate').datepicker({
+                language: navigator.language,
                 format: 'dd/mm/yyyy',
-                datesDisabled: [
+                mutedClass : [
                     {% for day in ad.notAvailableDays %}
                         "{{ day.format('d/m/Y') }}",
                     {% endfor %}
@@ -56,7 +57,7 @@
                 startDate: new Date()
             });
              $('#booking_startDate, #booking_endDate').on('change', calculateAmount);
-        // })
+        })
 
 
         function calculateAmount() {
@@ -73,7 +74,7 @@
                const amount  = days * {{ ad.price }};
 
                $('#days').text(days);
-               $('#amount').text(amount.toLocaleString('fr-FR'));
+               $('#amount').text(amount.toLocaleString(navigator.language));
            }
         }
     </script>
