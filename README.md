@@ -1,5 +1,6 @@
 # Sym5 BnB Application
 Developer: Sébastien NOBOUR
+
 Hosted on http://mowace-tech.com/
 
 ## What is this application ?
