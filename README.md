@@ -1,7 +1,7 @@
 # Sym5 BnB Application
 Developer: Sébastien NOBOUR
 
-Hosted on http://mowace-tech.com/
+Hosted on https://mowace-tech.com/
 
 ## What is this application ?
 This is an AirBnB replica. With this application, you can book a reservation, become an host and propose your own rentings.
